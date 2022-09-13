@@ -1,2 +1,7 @@
-weight = int(input("What is your body weight in pounds? "))
-print("You will need " + str(weight * 2 * 2.20462) + " grams of protein.")
+weight = float(input("What is your body weight in pounds? "))
+
+proteinCaluclation = float((weight / 2.20462) * 2)
+
+print(f"You will need {proteinCaluclation} grams of protein a day.")
+
+
