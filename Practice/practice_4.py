@@ -12,7 +12,7 @@ Exercise = input("Format: ")
 
 sets = Exercise[0:1]
 reps = Exercise[2:3]
-time = Exercise[4: ]
+time = Exercise[4:]
 
 
 print(sets, reps, time)
