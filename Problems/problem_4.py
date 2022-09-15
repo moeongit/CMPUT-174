@@ -15,4 +15,4 @@ else:
 if mark < 0 or mark > 100:
     print("Mark is invalid.")
 
-print("The grade for the mark " + str(mark) + " is " + grade + ".")
+print("The grade for the mark " + str(mark) + "% is " + grade + ".")
