@@ -1,7 +1,4 @@
 # This program takes the name and age of a character and compares it to Frodo and Gollum's age.
-from pdb import Restart
-
-
 frodo_age = 51
 gollum_age = 589
 name = input("What is the character's name? ").capitalize() # Asks the user for a character name and capitalizes the first letter of that name.
