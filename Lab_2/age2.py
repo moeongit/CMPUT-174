@@ -12,3 +12,11 @@ else:
         print(f"{name} is {age} years old, and they are older than Frodo but younger than Gollum.") #  If the character's age is greater than Frodo's but less than Gollum's, it will print that out.
     elif age < frodo_age and gollum_age:
         print(f"{name} is {age} years old, and they are younger than Frodo and Gollum.") # If the character's age is less than Frodo's and Gollum's, it will print that out.
+    elif age == frodo_age:
+        print(f"{name} is {age} years old, and they are of the same age as Frodo, but younger than Gollum.")
+    elif age == gollum_age:
+        print(f"{name} is {age} years old, and they are of the same age as Gollum and older than Frodo.")
+
+
+
+
