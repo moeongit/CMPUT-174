@@ -21,6 +21,9 @@ else: # If the user prints a valid age greater than 0, these functions will work
     elif gollum_age < age < arwen_age:
         print(f"{name} is {age} years old, and they are older than Gollum, Frodo, Pippin.") # If the character's age is greater than Gollum's but less than Frodo's, it will print out a 2 statements, one for who the character is older than and the other for who they are younger than.
         print(f"{name} is {age} years old, and they are younger than Arwen.")
+    
+    
+    ''' I assumed that we didn't need these elif statements but I wrote them before I realized this.
     elif age == pippin_age:
         print(f"{name} is {age} years old, and they are of the same age as Pippin.") # If the character's age is equal to Pippin's, it will print out 2 statements, one saying that they are of the same age, and the other saying who they are younger than, because they can't be older than anyone since Pippen is the youngest.
         print(f"{name} is {age} years old, and they are younger than Arwen, Gollum, Frodo.")
@@ -35,5 +38,4 @@ else: # If the user prints a valid age greater than 0, these functions will work
     elif age == arwen_age:
         print(f"{name} is {age} years old, and they are of the same age as Arwen.") # If the character's age is equal to Arwen's, it will print out 2 statements, one saying that they are of the same age, and the other saying that they are older than everyone else since Arwen is the oldest.
         print(f"{name} is {age} years old, and they are older than Gollum, Frodo, Pippin.")
-
-        # All of these elif statements are similar as there are multiple different outcomes when comparing one person's age to 4 people.
+'''
