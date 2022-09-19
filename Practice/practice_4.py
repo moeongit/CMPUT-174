@@ -23,6 +23,9 @@ first character from the string for sets
 right of x, second character for reps
 right side of, read the number, for time
 
+
+
+test.py?
 '''
 
 
