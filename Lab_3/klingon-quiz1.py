@@ -8,7 +8,7 @@ line3Almost = line3.split("|")[1] # This takes line 3, splits the vertical bar (
 line3Processed = line3Almost.strip("\n") # This takes out the "\n" in line 3
 user_translate = input(f"How do you translate {line3Processed} to Klingon?\n")
 
-if str(x) == str("De'wI'"):
+if str(user_translate) == str("De'wI'"):
     print("Correct!")
 else:
     print("Sorry, the correct answer is De'wI'")
