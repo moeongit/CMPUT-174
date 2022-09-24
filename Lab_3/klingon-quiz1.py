@@ -6,7 +6,7 @@ line3 = textFile.readline()
 
 line3Almost = line3.split("|")[1] # This takes line 3, splits the vertical bar (|) and the [1] takes the first index after the bar, which is computer
 line3Processed = line3Almost.strip("\n") # This takes out the "\n" in line 3
-x = input(f"How do you translate {line3Processed} to Klingon?\n")
+user_translate = input(f"How do you translate {line3Processed} to Klingon?\n")
 
 if str(x) == str("De'wI'"):
     print("Correct!")
