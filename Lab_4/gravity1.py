@@ -7,10 +7,8 @@ def decrypt_ceaser(text, shift) :
         elif 97 <= ord(letter) <= 122:
             newletter = chr(97 + (ord(letter)-97+shift)%26)
             decrypt = decrypt + newletter
-
         else:
             decrypt = decrypt + letter
-        
     return decrypt
 def main():
     user = input("Enter a string: ")
