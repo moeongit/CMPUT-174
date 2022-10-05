@@ -11,8 +11,8 @@ def decrypt_ceaser(text, shift) :
             decrypt = decrypt + letter
     return decrypt
 def main():
-    user = input("Enter a string: ")
-    print(decrypt_ceaser(user, -3))
+    text = input("Enter a text to decipher: ")
+    print(decrypt_ceaser(text, -3))
 
 main()
 
