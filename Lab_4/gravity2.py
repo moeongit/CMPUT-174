@@ -24,7 +24,7 @@ def decrypt_atbash(str):
             decrypt = decrypt + letter
     return decrypt
 
-def decrypt_a1z26(str):
+#def decrypt_a1z26(str):
     decrypt = ""
 
     if 1 <= int(letter) <= 26:
@@ -39,11 +39,11 @@ def decrypt_a1z26(str):
 
 
 def main():
-    text = input("Enter a string: ")
+    text = input("Enter a text to decipher: ")
     print("Let's try all the methods we have:")
     print(f"Ceaser cipher: {decrypt_ceaser(text, -3)}")
     print(f"Atbash cipher: {decrypt_atbash(text)}")
-    print(f"A1Z26 cipher: {decrypt_a1z26(text)}")
+    #print(f"A1Z26 cipher: {decrypt_a1z26(text)}")
 main()
 
 
