@@ -35,9 +35,6 @@ def decrypt_atbash(str):
         decrypt = decrypt + letter
     return decrypt
 
-
-
-
 def main():
     text = input("Enter a text to decipher: ")
     print("Let's try all the methods we have:")
@@ -45,6 +42,3 @@ def main():
     print(f"Atbash cipher: {decrypt_atbash(text)}")
     #print(f"A1Z26 cipher: {decrypt_a1z26(text)}")
 main()
-
-
-
