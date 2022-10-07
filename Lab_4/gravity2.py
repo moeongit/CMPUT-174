@@ -35,9 +35,6 @@ def decrypt_a1z26(str):
         decrypt = decrypt + letter
     return decrypt
 
-
-
-
 def main():
     text = input("Enter a string: ")
     print("Let's try all the methods we have:")
