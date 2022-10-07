@@ -1,21 +1,21 @@
-def decrypt_ceaser(text, shift):
-    decrypt = ""
+def decrypt_ceaser(text, shift): # Parameters are text and shift
+    decrypt = "" # Made a string for the decrypt message
     for letter in text:
-        if 65 <= ord(letter) <= 90:
-            newletter = chr(65 + (ord(letter)-65+shift) % 26)
+        if 65 <= ord(letter) <= 90: # used ord and ascii values for A-Z
+            newletter = chr(65 + (ord(letter)-65+shift) % 26) # Used math to shift the letter to the left by 3
             decrypt = decrypt + newletter
-        elif 97 <= ord(letter) <= 122:
+        elif 97 <= ord(letter) <= 122: # Did the same for lowercase letters
             newletter = chr(97 + (ord(letter)-97+shift) % 26)
             decrypt = decrypt + newletter
         else:
             decrypt = decrypt + letter
     return decrypt
 
-def decrypt_atbash(str):
+def decrypt_atbash(str): # Parameter is string
     decrypt = ""
     for letter in str:
-        if 65 <= ord(letter) <= 90:
-            newletter = chr(90 - (ord(letter) - 65))
+        if 65 <= ord(letter) <= 90: # Used ord and Ascii values to implement this
+            newletter = chr(90 - (ord(letter) - 65)) # 90 (Z) is added to the ascii value of the inputted letter and subtracted by 65
             decrypt = decrypt + newletter
         elif 97 <= ord(letter) <= 122:
             newletter = chr(122 - (ord(letter) - 97))
