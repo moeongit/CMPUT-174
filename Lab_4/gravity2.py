@@ -11,9 +11,9 @@ def decrypt_ceaser(text, shift): # Parameters are text and shift
             decrypt = decrypt + letter
     return decrypt
 
-def decrypt_atbash(str): # Parameter is string
+def decrypt_atbash(text): # Parameter is string
     decrypt = ""
-    for letter in str:
+    for letter in text:
         if 65 <= ord(letter) <= 90: # Used ord and Ascii values to implement this
             newletter = chr(90 - (ord(letter) - 65)) # 90 (Z) is added to the ascii value of the inputted letter and subtracted by 65
             decrypt = decrypt + newletter
@@ -23,7 +23,7 @@ def decrypt_atbash(str): # Parameter is string
         else:
             decrypt = decrypt + letter
     return decrypt
-
+'''
 def decrypt_A1Z26(str):
     decrypt = ""
     dash = str.find('-')
@@ -56,7 +56,7 @@ def decrypt_A1Z26(str):
             break
         dash = str.find('-')
     return decrypt    
-
+'''
 
 
 def main():
@@ -64,5 +64,5 @@ def main():
     print("Let's try all the methods we have:")
     print(f"Ceaser cipher: {decrypt_ceaser(text, -3)}")
     print(f"Atbash cipher: {decrypt_atbash(text)}")
-    print(f"A1Z26 cipher: {decrypt_A1Z26(text)}")
+    #print(f"A1Z26 cipher: {decrypt_A1Z26(text)}")
 main()
