@@ -1,19 +1,14 @@
 # Visit All Squares
 
-
 import random
-
 
 GAME_PIECE = "@"
 MAX_VISITS = 3
-
 
 def create_board(size: int)-> list:
     # Creates a board with the given size
     board = [0] * size
     return board # Throw
-
-
 
 def display_board(board, current_position):
     display_str = "|"
@@ -26,15 +21,11 @@ def display_board(board, current_position):
         print(display_str)
         print("=" * len(display_str))
 
-
-
 def roll_die(sides: int)-> int:
     # Returns a number between 1 and number of sides
     input("Press enter to roll. ")
     number = random.randint(1, sides)
     return number # Throw
-
-
 
 def update_board(board, current_position, value):
     # Updates the board
@@ -45,7 +36,6 @@ def update_board(board, current_position, value):
 def is_game_over(board):
 
     return MAX_VISITS in board or 0 not in board
-
 
 def main():
     game_over = False

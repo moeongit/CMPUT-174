@@ -24,21 +24,45 @@ def decrypt_atbash(str): # Parameter is string
             decrypt = decrypt + letter
     return decrypt
 
-#def decrypt_a1z26(str):
+def decrypt_A1Z26(str):
     decrypt = ""
+    dash = str.find('-')
+    while True:
+        if dash == -1:
+            letter = str
+        else:
+            letter = str[0:dash]
+            str = str[dash+1:]
+        if letter == "":
+            break
+        count = 0
+        if " " in letter:
+            for counting in letter:
+                if counting != ' ':
+                    count+=1
+                else:
+                    break
+        if count == 0:
+            decrypt += chr(65 + (int(letter) -1))
+        else:
+            letter_1 =int(letter[0:count])
+            decrypt += chr(65 + (int(letter_1) -1))
+            letter_2 = ' '
+            decrypt += letter_2
+            letter_3 = int(letter[count+1:])
+            decrypt += chr(65 + (int(letter_3) -1))
+        #print(decrypt)
+        if dash == -1:
+            break
+        dash = str.find('-')
+    return decrypt    
 
-    if 1 <= int(letter) <= 26:
-        number = 65 + int(letter) - 1
-        letter = chr(number)
-        decrypt = decrypt + letter
-    else:
-        decrypt = decrypt + letter
-    return decrypt
+
 
 def main():
     text = input("Enter a text to decipher: ")
     print("Let's try all the methods we have:")
     print(f"Ceaser cipher: {decrypt_ceaser(text, -3)}")
     print(f"Atbash cipher: {decrypt_atbash(text)}")
-    #print(f"A1Z26 cipher: {decrypt_a1z26(text)}")
+    print(f"A1Z26 cipher: {decrypt_A1Z26(text)}")
 main()
