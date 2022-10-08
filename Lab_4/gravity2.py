@@ -12,13 +12,13 @@ def decrypt_ceaser(text, shift): # Parameters are text and shift
     return decrypt
 
 def decrypt_atbash(text): # Parameter is text
-    decrypt = ""
+    decrypt = "" # Made a string for the decrypt message
     for letter in text:
         if 65 <= ord(letter) <= 90: # Used ord and Ascii values to implement this
             newletter = chr(90 - (ord(letter) - 65)) # 90 (Z) is added to the ascii value of the inputted letter and subtracted by 65
             decrypt = decrypt + newletter
-        elif 97 <= ord(letter) <= 122:
-            newletter = chr(122 - (ord(letter) - 97))
+        elif 97 <= ord(letter) <= 122: # Did the same for lowercase letters
+            newletter = chr(122 - (ord(letter) - 97)) 
             decrypt = decrypt + newletter
         else:
             decrypt = decrypt + letter
