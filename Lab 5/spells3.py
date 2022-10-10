@@ -25,7 +25,6 @@ def get_user_input(spell: str) -> str:
 
 def display_feedback(spell: str, user_input: str):
     if user_input.lower() != spell.strip("\n"):
-        #score -= 5
         print("Incorrect!")
         print(f"The correct spell was: {spell}")
 
