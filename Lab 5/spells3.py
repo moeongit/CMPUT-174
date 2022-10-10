@@ -48,7 +48,7 @@ def main() -> None:
         spells = read_spells('spells.txt')
         spell = get_random_spell(spells)
         user_input = get_user_input(spell)
-        if user_input != spell.strip("\n"):
+        if user_input.lower() != spell.strip("\n"):
             score -= 5
             display_feedback(spell, user_input)
             print(f"You lost 5 points! Your score is: {score}")
@@ -57,6 +57,6 @@ def main() -> None:
             display_feedback(spell, user_input)
             print(f"You get 10 points! Your score is: {score}")
         condition = play_again()
-    print(f"Your final score is {score}")
+    print(f"Your final score is {score}.")
 
 main()
