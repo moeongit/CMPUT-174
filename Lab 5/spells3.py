@@ -34,7 +34,7 @@ def display_feedback(spell: str, user_input: str):
     return user_input
 
 def play_again() -> bool:
-    play = input("Would you like to play again? (y/n) ")
+    play = input("Would you like to play again? (y/n) ").lower()
     if play == "y":
         return True
 
