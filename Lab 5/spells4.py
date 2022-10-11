@@ -1,7 +1,6 @@
 import random
 import time
 
-
 def read_spells(filename: str):
     with open('spells.txt') as filename:
         spells = filename.readlines()
@@ -29,11 +28,11 @@ def play_again() -> bool:
         return False
 
 def get_user_input(spell: str) -> str:
-    # start = time.time()
+    #start = time.time()
     print(f"Type the following spell: {spell}")
     user_input = input().lower()
-    # user_time = round(time.time() - start, 2)
-    # print(f"Result: {user_time} seconds (goal: {get_target_time(spell)} seconds).")
+    #user_time = round(time.time() - start, 2)
+    #print(f"Result: {user_time} seconds (goal: {get_target_time(spell)} seconds).")
     return user_input
 
 def get_target_time(spell: str) -> float:
@@ -70,4 +69,5 @@ def main() -> None:
     display_header()
     display_instructions()
     calculate_points(str, str, float)
+    
 main()
