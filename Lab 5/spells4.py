@@ -26,7 +26,7 @@ def play_again() -> bool:
     if play == "y":
         return True
     elif play == "n":
-        exit()
+        return False
 
 def get_user_input(spell: str) -> str:
     # start = time.time()
@@ -50,12 +50,12 @@ def calculate_points(spell: str, user_input: str, user_time: float) -> int:
             score -= 5
             display_feedback(spell, user_input)
             print(f"You lost 5 points! Your score is: {score}")
-            play_again()
         else:
             score += 10
             display_feedback(spell, user_input)
             print(f"You get 10 points! Your score is: {score}")
-            play_again()
+        condition = play_again()
+    print(f"Your final score is {score}.")
 
 
 def display_feedback(spell: str, user_input: str):
@@ -70,5 +70,4 @@ def main() -> None:
     display_header()
     display_instructions()
     calculate_points(str, str, float)
-    play_again()
 main()
