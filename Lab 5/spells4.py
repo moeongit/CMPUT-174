@@ -36,8 +36,8 @@ def get_user_input(spell: str) -> str:
     return user_input, user_time
 
 def get_target_time(spell: str) -> float:
-    TTT = len(spell) * 0.3
-    return TTT
+    TTT = (len(spell) * 0.3) - 0.3
+    return TTT  
 
 def calculate_points(spell: str, user_input: str, user_time: float) -> int:
     condition = True
@@ -53,10 +53,22 @@ def calculate_points(spell: str, user_input: str, user_time: float) -> int:
             score -= 5
             display_feedback(spell, user_input)
             print(f"You lost 5 points! Your score is: {score}")
-        else:
-            score += 10
-            display_feedback(spell, user_input)
-            print(f"You get 10 points! Your score is: {score}")
+        elif user_input.lower() == spell.strip("\n"):
+            if user_time <= get_target_time(spell):
+                score += 10
+                display_feedback(spell, user_input)
+                print(f"You get 10 points! Your score is: {score}")
+        elif user_input.lower() == spell.strip("\n"):
+            if get_target_time(spell) < user_time <= (get_target_time(spell) * 1.5):
+                score += 6
+                display_feedback(spell, user_input)
+                print(f"You get 6 points! Your score is {score}")
+        elif user_input.lower() == spell.strip("\n"):
+            if user_time >= get_target_time(spell) * 2:
+                score += 1
+                display_feedback(spell, user_input)
+                print(f"You get 1 point! Your score is {score}")
+
         condition = play_again()
     print(f"Your final score is {score}.")
     
@@ -77,7 +89,4 @@ def main() -> None:
     display_instructions()
     calculate_points(str, str, float)
     get_target_time(random)
-
-    
-    
 main()
