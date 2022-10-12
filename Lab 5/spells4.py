@@ -36,7 +36,7 @@ def get_user_input(spell: str) -> str:
     return user_input, user_time
 
 def get_target_time(spell: str) -> float:
-    TTT = (len(spell) * 0.3) - 0.3
+    TTT = (len(spell) * 0.3) - 0.3  
     return TTT  
 
 def calculate_points(spell: str, user_input: str, user_time: float) -> int:
@@ -54,24 +54,32 @@ def calculate_points(spell: str, user_input: str, user_time: float) -> int:
             display_feedback(spell, user_input)
             print(f"You lost 5 points! Your score is: {score}")
         elif user_input.lower() == spell.strip("\n"):
+            # If the user’s typing time is faster or equal to TTT, the score will be 10.
             if user_time <= get_target_time(spell):
                 score += 10
                 display_feedback(spell, user_input)
                 print(f"You get 10 points! Your score is: {score}")
-        elif user_input.lower() == spell.strip("\n"):
-            if get_target_time(spell) < user_time <= (get_target_time(spell) * 1.5):
+            # If the user’s typing time is faster or equal to (TTT * 1.5) but slower than TTT, the score will be 6.
+            elif get_target_time(spell) < user_time <= (get_target_time(spell) * 1.5):
                 score += 6
                 display_feedback(spell, user_input)
                 print(f"You get 6 points! Your score is {score}")
-        elif user_input.lower() == spell.strip("\n"):
-            if user_time >= get_target_time(spell) * 2:
+
+            # If the user’s typing time is faster or equal to (TTT * 2) but slower than (TTT * 1.5), the score will be 3. 
+            elif (get_target_time(spell) * 1.5) < user_time <= (get_target_time(spell) * 2):
+                score += 3
+                display_feedback(spell, user_input)
+                print(f"You get 3 points! Your score is {score}")
+
+            elif user_time >= get_target_time(spell) * 2:
                 score += 1
                 display_feedback(spell, user_input)
                 print(f"You get 1 point! Your score is {score}")
 
+
         condition = play_again()
     print(f"Your final score is {score}.")
-    
+    return calculate_points
 
 
 def display_feedback(spell: str, user_input: str):
