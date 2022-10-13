@@ -45,7 +45,6 @@ def calculate_points(spell: str, user_input: str, user_time: float) -> int:
     while condition: # While my condition is True
         spells = read_spells('spells.txt')
         spell = get_random_spell(spells)
-        print(spell)
         get_tuple = get_user_input(spell)
         user_input = get_tuple[0] # Had to do this because I couldn't convert the tuples
         user_time = get_tuple[1]
