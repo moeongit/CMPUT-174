@@ -1,9 +1,10 @@
-def make_roll() -> tuple:
-    """
-    Returns a tuple of five random values between 1 and 6.
-    """
-    pass
+import random
 
+def make_roll() -> tuple:
+    numbers = []
+    for i in range(0, 5):
+        numbers.append(random.randint(1, 6))
+    print(numbers)
 
 def sum_of_given_number(roll: tuple, number: int) -> int:
     """
@@ -26,12 +27,11 @@ def display_upper_section(upper_section_scores: list) -> None:
     pass
 
 def main():
-    """
-    Main function.
-    """
+    make_roll()
     # TODO: Roll the dice (and print as in demo)
     # TODO: Fill the upper section
     # TODO: Display the upper section
+
 
 if __name__ == "__main__":
     main()
