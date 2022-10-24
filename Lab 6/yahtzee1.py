@@ -4,6 +4,7 @@ def make_roll() -> tuple:
     numbers = []
     for i in range(0, 5):
         numbers.append(random.randint(1, 6))
+    numbers = tuple(numbers)
     print(f"Rolling the dice. . . {numbers}")
     return numbers
 
@@ -33,9 +34,6 @@ def main():
     roll = make_roll()
     upper = fill_upper_section(roll)
     display_upper_section(upper)
-    # TODO: Roll the dice (and print as in demo)
-    # TODO: Fill the upper section
-    # TODO: Display the upper section
 
 if __name__ == "__main__":
     main()
