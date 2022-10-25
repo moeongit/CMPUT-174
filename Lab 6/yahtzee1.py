@@ -33,9 +33,6 @@ def main():
     roll = make_roll()
     upper = fill_upper_section(roll)
     display_upper_section(upper)
-    # TODO: Roll the dice (and print as in demo)
-    # TODO: Fill the upper section
-    # TODO: Display the upper section
 
 if __name__ == "__main__":
     main()
