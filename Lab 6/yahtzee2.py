@@ -30,10 +30,29 @@ def display_upper_section(upper_section_scores: list) -> None:
     print(f"Fives: {upper_section_scores[4]}")
     print(f"Sixes: {upper_section_scores[5]}")
 
+def num_of_a_kind(roll: tuple, number: int) -> int:
+    """
+    If a roll has EXACTLY `number` dice of the same face value,
+    returns the sum of all five values in the roll.
+    Otherwise, returns 0.
+    """
+    pass
+
+def yahtzee(roll: tuple) -> int:
+    """
+    Returns 50 if the roll is a Yahtzee (all dice in the roll have the same
+    face value). Otherwise, returns 0.
+    """
+    pass
+
 def main():
-    roll = make_roll()
-    upper = fill_upper_section(roll)
-    display_upper_section(upper)
+    """
+    Main function.
+    """
+    # Version 1 code
+    # TODO: Calculate and display "3 of a kind" for the given roll
+    # TODO: Calculate and display "4 of a kind" for the given roll
+    # TODO: Calculate and display "Yahtzee" for the given roll
 
 if __name__ == "__main__":
     main()
