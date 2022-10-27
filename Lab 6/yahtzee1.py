@@ -11,7 +11,7 @@ def make_roll() -> tuple:
 def sum_of_given_number(roll: tuple, number: int) -> int:
     count = 0
     for i in range(len(roll)): 
-        if number == roll[i]: # If number == roll[i] count is increased by 1 and count is multiplied by 1
+        if number == roll[i]: # If number == roll[i] count is increased by 1 and count is multiplied by the number
             count += 1 
     sum = count * number # 
     return sum
@@ -19,7 +19,7 @@ def sum_of_given_number(roll: tuple, number: int) -> int:
 def fill_upper_section(roll: tuple) -> list:
     upper = []
     for i in range(1, 7): 
-        upper.append(sum_of_given_number(roll, i)) # Appends sum of given number with roll and i
+        upper.append(sum_of_given_number(roll, i)) # Appends sum of given number with parameters roll and i
     return upper
 
 def display_upper_section(upper_section_scores: list) -> None:
