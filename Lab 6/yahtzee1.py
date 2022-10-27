@@ -2,24 +2,24 @@ import random
 
 def make_roll() -> tuple:
     numbers = []
-    for i in range(0, 5):
-        numbers.append(random.randint(1, 6))
+    for i in range(0, 5): # 5 digits
+        numbers.append(random.randint(1, 6)) # Random number from 1-6
     numbers = tuple(numbers)
     print(f"Rolling the dice. . . {numbers}")
     return numbers
 
 def sum_of_given_number(roll: tuple, number: int) -> int:
     count = 0
-    for i in range(len(roll)):
-        if number == roll[i]:
-            count += 1
-    sum = count * number
+    for i in range(len(roll)): 
+        if number == roll[i]: # If number == roll[i] count is increased by 1 and count is multiplied by 1
+            count += 1 
+    sum = count * number # 
     return sum
 
 def fill_upper_section(roll: tuple) -> list:
     upper = []
-    for i in range(1, 7):
-        upper.append(sum_of_given_number(roll, i))
+    for i in range(1, 7): 
+        upper.append(sum_of_given_number(roll, i)) # Appends sum of given number with roll and i
     return upper
 
 def display_upper_section(upper_section_scores: list) -> None:

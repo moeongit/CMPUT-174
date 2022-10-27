@@ -1,5 +1,7 @@
 import random
 
+# First Version
+
 def make_roll() -> tuple:
     numbers = []
     for i in range(0, 5):
@@ -38,7 +40,7 @@ def num_of_a_kind(roll: tuple, number: int) -> int:
     Otherwise, returns 0.
     """
     for i in roll:
-        if roll.count(i) == number:
+        if roll.count(i) == number: # If the roll count(i) == number, it returns the sum, else it returns 0
             return sum(roll)
 
     return 0
@@ -48,8 +50,8 @@ def yahtzee(roll: tuple) -> int:
     Returns 50 if the roll is a Yahtzee (all dice in the roll have the same
     face value). Otherwise, returns 0.
     """
-    for number in roll:
-        if number != roll[0]:
+    for number in roll: 
+        if number != roll[0]: # If the number != all of the numbers in the roll, it returns 0, else returns 50
             return 0
 
     return 50
@@ -59,7 +61,7 @@ def main():
     upper = fill_upper_section(roll)
     display_upper_section(upper)
     print("Lower section: ")
-    print(f"Three of a kind: {num_of_a_kind(roll, 3)}")
+    print(f"Three of a kind: {num_of_a_kind(roll, 3)}") 
     print(f"Four of a kind: {num_of_a_kind(roll, 4)}")
     print(f"Yahtzee: {yahtzee(roll)}")
 
