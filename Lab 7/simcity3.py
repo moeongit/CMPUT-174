@@ -62,7 +62,7 @@ def main() -> None:
     """
     Main program.
     """
-    grid = create_grid("data_0.txt")
+    grid = create_grid("data_1.txt")
     print("Sim City land values:")
     display_grid(grid)
     print("\nCalculated Sim City land values:")
