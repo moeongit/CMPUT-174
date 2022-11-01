@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 def create_grid(filename: str) -> list[list[int]]:
     with open(filename, "r") as filename:
         str_nums = filename.readlines()
@@ -45,17 +47,17 @@ def fill_gaps(grid: list[list[int]]) -> list[list[int]]:
     Calls find_neighbor_values() to find the neighbors of each cell
     Do NOT modify the original grid!
     """
-    # TODO: Implement this function
-    new_grid = []
-    for i in grid:
-        if i == 0:
-    
-    # return new_grid
+    for row in range(len(grid[0])):
+        for col in range(len(grid[1])):
+            if grid[row][col] == 0:
+                average = 0
+                close_neighbors = find_neighbor_values(grid, row, col)
+                for i in close_neighbors:
+                    average += i
+                new_number = round(average/(len(close_neighbors)))
+                grid[row][col] = new_number
+    return grid
 
-
-
-
-    
 def main() -> None:
     """
     Main program.
