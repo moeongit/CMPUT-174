@@ -49,10 +49,10 @@ def fill_gaps(grid: list[list[int]]) -> list[list[int]]: # Fills the 0's, adds t
         for col in range(len(grid[1])):
             if grid[row][col] == 0:
                 average = 0
-                close_neighbors = find_neighbor_values(grid, row, col)
-                for i in close_neighbors:
+                neighbors = find_neighbor_values(grid, row, col)
+                for i in neighbors:
                     average += i
-                new_number = round(average/(len(close_neighbors)))
+                new_number = round(average/(len(neighbors)))
                 grid[row][col] = new_number
     return grid
 
