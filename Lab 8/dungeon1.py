@@ -1,10 +1,12 @@
 MAP_FILE = 'cave_map.txt'
 
 def load_map(map_file: str) -> list[list[str]]:
-    """
-    Loads a map from a file as a grid (list of lists)
-    """
-    # TODO: implement this function
+    grid = []
+    with open(map_file, 'r') as file:
+        for line in file:
+            convert = list(line.strip())
+            grid.append(convert)
+    print(grid)
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
     """
@@ -23,7 +25,6 @@ def main():
     """
     Main entry point for the game.
     """
-    # TODO: implement the main() function
-
+    load_map('cave_map.txt')
 if __name__ == '__main__':
     main()
