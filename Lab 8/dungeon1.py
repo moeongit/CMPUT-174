@@ -6,33 +6,31 @@ def load_map(map_file: str) -> list[list[str]]:
         for line in file:
             convert = list(line.strip()) # Converts to a list and strips the "\n"
             grid.append(convert) # Appends the lists to the list grid
-    print(grid)
+    return grid
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
-    """
-    Finds the starting position of the player on the map.
-    """
-    
 
+    starting_letter = "S"
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            if grid[i][j] == starting_letter:
+                starting_index = [i, j]
+                break
+    return starting_index
 
 def get_command() -> str:
-    """
-    Gets a command from the user.
-    """
     while True:
         user_input = input("> ")
         if user_input.lower() == "escape":
             exit()
         print("I do not understand.")
 
-
 def main():
-    """
-    Main entry point for the game.
-    """
-    
     grid = load_map('cave_map.txt')
-    # find_start(grid)
+    print(grid)
+    starting_position = find_start(grid)
+    print(f"Starting position: {starting_position}")
     get_command()
+
 if __name__ == '__main__':
     main()
