@@ -1,47 +1,82 @@
+import copy
 
 MAP_FILE = 'cave_map.txt'
 
 def load_map(map_file: str) -> list[list[str]]:
-    """
-    Loads a map from a file as a grid (list of lists)
-    """
-    # Implemented in version 1
+    grid = []
+    with open(map_file, 'r') as file: 
+        for line in file:
+            convert = list(line.strip()) # Converts to a list and strips the "\n"
+            grid.append(convert) # Appends the lists to the list grid
+    return grid
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
-    """
-    Finds the starting position of the player on the map.
-    """
-    # Implemented in version 1
+    starting_letter = "S"
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            if grid[i][j] == starting_letter:
+                starting_index = [i, j]
+                break
+    return starting_index
 
 def get_command() -> str:
-    """
-    Gets a command from the user.
-    """
-    # Implemented in version 1
+    while True:
+        user_input = input("> ")
+        if user_input.lower() == "escape":
+            exit()
+        print("I do not understand.")
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
-    """
-    Displays the map.
-    """
-    # Implemented in version 2
+    user_input = input("> ")
+    new_grid = copy.deepcopy(grid)
+    row = player_position[0]
+    col = player_position[1]
+    new_grid[row][col] = "@"
+    if user_input.lower() == "show map":
+        for i in new_grid:
+            for j in i:
+                print(j, end = "")
+            print()
 
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
     Returns the size of the grid.
     """
-    # Implemented in version 2
-
+    rows = len(grid)
+    cols = len(grid[0])
+    return [rows, cols]
+    
 def is_inside_grid(grid: list[list[str]], position: list[int, int]) -> bool:
     """
     Checks if a given position is valid (inside the grid).
     """
-    # Implemented in version 2
+    grid_rows, grid_cols = get_grid_size(grid)
+    if (position[0] >= grid_rows) or (position[1] >= grid_cols):
+        return False
+    elif (position[0] < 0) or (position[1] < 0):
+        return False
+    else:
+        return True
 
 def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     """
     Returns the allowed directions.
     """
-    # Implemented in version 2
+    allowed_objects = ('S', 'F', '*')
+    row = player_position[0]
+    col = player_position[1]
+    directions = []
+    if is_inside_grid(grid, [row - 1, col]) and grid[row - 1][col] in allowed_objects:
+        directions.append('North')
+    if is_inside_grid(grid, [row + 1, col]) and grid[row + 1][col] in allowed_objects:
+        directions.append('South')
+    if is_inside_grid(grid, [row, col + 1]) and grid[row][col + 1] in allowed_objects:
+        directions.append('East')
+    if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
+        directions.append('West')
+    joined_directions = ", ".join(directions)
+    print(f"You can go {joined_directions}")
+
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
     """
