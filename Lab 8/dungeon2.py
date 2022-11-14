@@ -51,15 +51,11 @@ def is_inside_grid(grid: list[list[str]], position: list[int, int]) -> bool:
     Checks if a given position is valid (inside the grid).
     """
     grid_rows, grid_cols = get_grid_size(grid)
-    if (position[0] > grid_rows) and (position[1] > grid_cols):
+    if (position[0] >= grid_rows) or (position[1] >= grid_cols):
         return False
-    elif (position[0] < grid_rows) and (position[1] > grid_cols):
+    elif (position[0] < 0) or (position[1] < 0):
         return False
-    elif (position[0] > grid_rows) and (position[1] < grid_cols):
-        return False
-    elif (position[0] < grid_rows) and (position[1] < grid_cols):
-        return True
-    elif (position[0] == grid_rows) and (position[1] == grid_cols):
+    else:
         return True
 
 def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
@@ -71,19 +67,23 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     col = player_position[1]
     directions = []
     if is_inside_grid(grid, [row - 1, col]) and grid[row - 1][col] in allowed_objects:
-        directions.append('north')
-    # TODO: implement the rest of the function
+        directions.append('North')
+    if is_inside_grid(grid, [row + 1, col]) and grid[row + 1][col] in allowed_objects:
+        directions.append('South')
+    if is_inside_grid(grid, [row, col + 1]) and grid[row][col + 1] in allowed_objects:
+        directions.append('East')
+    if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
+        directions.append('West')
+    # print('You can go ' + ','.join(directions))
+    joined_directions = ", ".join(directions)
+    print(f"You can go {joined_directions}")
 
 def main():
-    """
-    Main entry point for the game.
-    """
     grid = load_map(MAP_FILE)
     starting_position = find_start(grid)
+    look_around(grid, (0, 0))
     display_map(grid, starting_position)
     get_grid_size(grid)
-    print(is_inside_grid(grid, (4, 5)))
-
     
 if __name__ == '__main__':
     main()
