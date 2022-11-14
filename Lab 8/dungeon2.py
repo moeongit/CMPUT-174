@@ -1,28 +1,34 @@
 MAP_FILE = 'cave_map.txt'
 
 def load_map(map_file: str) -> list[list[str]]:
-    """
-    Loads a map from a file as a grid (list of lists)
-    """
-    # Implemented in version 1
+    grid = []
+    with open(map_file, 'r') as file: 
+        for line in file:
+            convert = list(line.strip()) # Converts to a list and strips the "\n"
+            grid.append(convert) # Appends the lists to the list grid
+    return grid
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
-    """
-    Finds the starting position of the player on the map.
-    """
-    # Implemented in version 1
+    starting_letter = "S"
+    starting_index = []
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            if grid[i][j] == starting_letter:
+                starting_index = [i, j]
+                break
+    return starting_index
 
 def get_command() -> str:
-    """
-    Gets a command from the user.
-    """
-    # Implemented in version 1
+    while True:
+        user_input = input("> ")
+        if user_input.lower() == "escape":
+            exit()
+        print("I do not understand.")
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
     """
     Displays the map.
     """
-    # TODO: implement this function
 
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
@@ -53,7 +59,6 @@ def main():
     """
     Main entry point for the game.
     """
-    # TODO: update the main() function
-
+    
 if __name__ == '__main__':
     main()
