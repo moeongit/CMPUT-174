@@ -9,7 +9,6 @@ def load_map(map_file: str) -> list[list[str]]:
     return grid
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
-
     starting_letter = "S"
     for i in range(len(grid)):
         for j in range(len(grid)):
