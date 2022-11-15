@@ -30,11 +30,6 @@ def get_command() -> str:
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
     new_grid = copy.deepcopy(grid)
-    # change_1 = new_grid.replace("@", "🧝")
-    # change_2 = new_grid.replace("S", "🏠")
-    # change_3 = new_grid.replace("F", "🏺")
-    # change_4 = new_grid.replace("*", "🟢")
-    # change_5 = new_grid.replace("-", "🧱")
     row = player_position[0]
     col = player_position[1]
     new_grid[row][col] = "@"
@@ -52,7 +47,6 @@ def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
                 new_grid[i][j] = "🧱"
             print(new_grid[i][j], end = "")
         print()
-    # return change_1, change_2, change_3, change_4, change_5
 
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
@@ -95,7 +89,7 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
     # print("direction = ", direction)
     valid_directions = look_around(grid, player_position)
-    direction = direction.split(" ")[1]
+    # direction = direction.split(" ")[1]
     row = player_position[0]
     col = player_position[1]
     if not direction in valid_directions:
@@ -109,7 +103,7 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
         player_position[1] = player_position[1] - 1
     elif direction.lower() == "east":
         player_position[1] = player_position[1] + 1
-    return True, row, col
+    return True
 
 def display_valid_directions(grid, player_position):
     directions = look_around(grid, player_position)
@@ -120,16 +114,14 @@ def check_finish(grid: list[list[str]], player_position: list[int, int]) -> bool
     """
     Checks if the player has reached the exit.
     """
-    finished = False
     finished_letter = "F"
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == finished_letter:
                 finished_index = [i, j]
                 break
-    if player_position == finished_index:
-        finished = True
-        return finished
+    return player_position == finished_index
+
 
 def display_help() -> None:
     with open("help.txt", "r") as file:
@@ -156,7 +148,7 @@ def main():
             display_map(grid, starting_position)
             continue
         get_grid_size(grid)
+        direction = direction.split(" ")[1]
         move(direction, starting_position, grid)
 if __name__ == '__main__':
     main()
-

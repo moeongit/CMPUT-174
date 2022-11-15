@@ -80,9 +80,9 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
     # print("direction = ", direction)
     valid_directions = look_around(grid, player_position)
-    direction = direction.split(" ")[1]
-    print(direction)
-    print(player_position)
+    # direction = direction.split(" ")[1]
+    # print(direction)
+    # print(player_position)
     row = player_position[0]
     col = player_position[1]
     if not direction in valid_directions:
@@ -119,6 +119,7 @@ def main():
             display_valid_directions(grid, starting_position)
             continue
         get_grid_size(grid)
+        direction = direction.split(" ")[1]
         move(direction, starting_position, grid)
         
 if __name__ == '__main__':
