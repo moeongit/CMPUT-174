@@ -12,10 +12,12 @@ def load_map(map_file: str) -> list[list[str]]:
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
     starting_letter = "S"
+    starting_index = []
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == starting_letter:
-                starting_index = [i, j]
+                starting_index.append(i)
+                starting_index.append(j)
                 break
     return starting_index
 

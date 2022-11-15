@@ -12,10 +12,12 @@ def load_map(map_file: str) -> list[list[str]]:
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
     starting_letter = "S"
+    starting_index = []
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == starting_letter:
-                starting_index = [i, j]
+                starting_index.append(i)
+                starting_index.append(j)
                 break
     return starting_index
 
@@ -72,14 +74,15 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
         directions.append('east')
     if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
         directions.append('west')
-    # joined_directions = ", ".join(directions)
-    # print(f"You can go {joined_directions}")
+
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
     # print("direction = ", direction)
     valid_directions = look_around(grid, player_position)
     direction = direction.split(" ")[1]
+    print(direction)
+    print(player_position)
     row = player_position[0]
     col = player_position[1]
     if not direction in valid_directions:
@@ -100,7 +103,6 @@ def display_valid_directions(grid, player_position):
     directions = look_around(grid, player_position)
     joined_directions = ", ".join(directions)
     print(f"You can go {joined_directions}")
-
 
 def main():
     grid = load_map(MAP_FILE)
