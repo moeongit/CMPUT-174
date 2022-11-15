@@ -78,11 +78,8 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
-    # print("direction = ", direction)
+
     valid_directions = look_around(grid, player_position)
-    # direction = direction.split(" ")[1]
-    # print(direction)
-    # print(player_position)
     row = player_position[0]
     col = player_position[1]
     if not direction in valid_directions:
@@ -97,7 +94,7 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
     elif direction.lower() == "east":
         player_position[1] = player_position[1] + 1
     display_valid_directions(grid, player_position)
-    return True, row, col
+    return True
 
 def display_valid_directions(grid, player_position):
     directions = look_around(grid, player_position)

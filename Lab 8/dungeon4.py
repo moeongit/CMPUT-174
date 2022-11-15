@@ -122,7 +122,6 @@ def check_finish(grid: list[list[str]], player_position: list[int, int]) -> bool
                 break
     return player_position == finished_index
 
-
 def display_help() -> None:
     with open("help.txt", "r") as file:
         for line in file:
