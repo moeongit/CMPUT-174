@@ -22,22 +22,20 @@ def find_start(grid: list[list[str]]) -> list[int, int]:
 def get_command() -> str:
     while True:
         user_input = input("> ")
-        if user_input.lower() == "escape":
-            exit()
+        if user_input.lower() in ["go north", "go south", "go east", "go west", "show map", "escape"]:
+            return user_input
         print("I do not understand.")
 
+
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
-    user_input = input("> ")
     new_grid = copy.deepcopy(grid)
     row = player_position[0]
     col = player_position[1]
     new_grid[row][col] = "@"
-    if user_input.lower() == "show map":
-        for i in new_grid:
-            for j in i:
-                print(j, end = "")
-            print()
-
+    for i in new_grid:
+        for j in i:
+            print(j, end = "")
+        print()
 
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
@@ -80,42 +78,38 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
-    look_around(grid, player_position)
-    move = False
+    # print("direction = ", direction)
+    valid_directions = look_around(grid, player_position)
+    direction = direction.split(" ")[1]
     row = player_position[0]
     col = player_position[1]
-    if direction.lower() == "go north":
-        if row - 1 >= 0:
-            row = row - 1
-            move = True
-    elif direction.lower() == "go south":
-        if row + 1 >= 0:
-            row = row + 1
-            move = True
-    elif direction.lower() == "go west":
-        if col - 1 >= 0:
-            col = col - 1
-            move = True
-    elif direction.lower() == "go east":
-        if col + 1 >= 0:
-            col = col + 1
-            move = True
-    if move:
-        player_position[0] = row
-        player_position[1] = col
-    else:
+    if not direction in valid_directions:
         print("Invalid Move.")
-    return move
-
-
-    # TODO: implement this function
+        return False
+    if direction.lower() == "north":
+        player_position[0] = player_position[0] - 1 
+    elif direction.lower() == "south":
+        player_position[0] = player_position[0] + 1 
+    elif direction.lower() == "west":
+        player_position[1] = player_position[1] - 1
+    elif direction.lower() == "east":
+        player_position[1] = player_position[1] + 1
+    return True
 
 def main():
-    """
-    Main entry point for the game.
-    """
-    
+    grid = load_map(MAP_FILE)
+    starting_position = find_start(grid)
+    look_around(grid, starting_position)
+    while True:
+        user_command = get_command() 
+        if user_command.lower() == "escape":
+            exit()
+        elif user_command.lower() == "show map":
+            display_map(grid, starting_position)
+            continue
+        get_grid_size(grid)
+        direction = user_command
+        move(direction, starting_position, grid)
 
 if __name__ == '__main__':
     main()
-
