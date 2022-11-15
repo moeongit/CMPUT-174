@@ -24,21 +24,21 @@ def find_start(grid: list[list[str]]) -> list[int, int]:
 def get_command() -> str:
     while True:
         user_input = input("> ")
-        if user_input.lower() == "escape": # If the user types escape, the function will exit
-            exit()
+        if user_input.lower() in ["go north", "go south", "go east", "go west", "show map", "escape"]:
+            return user_input
         print("I do not understand.") # Else, it will print "I do not understand."
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
-    user_input = input("> ")
+
     new_grid = copy.deepcopy(grid) # Makes a copy of the grid
     row = player_position[0] # Rows is the 0 index, cols is the 1st index
     col = player_position[1]
     new_grid[row][col] = "@"
-    if user_input.lower() == "show map": # If the user tyes "show map", the following will occur
-        for i in new_grid:
-            for j in i:
-                print(j, end = "")
-            print()
+    for i in new_grid:
+        for j in i:
+            print(j, end = "")
+        print()
+
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
     Returns the size of the grid.
@@ -75,8 +75,6 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
         directions.append('east') # This is the math for "East"
     if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
         directions.append('west') # This is the math for "West"
-    joined_directions = ", ".join(directions) # Made a variable for a join function
-    print(f"You can go {joined_directions}.") # Joins all the directions together and prints where the user can go
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
@@ -94,7 +92,6 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
         player_position[1] = player_position[1] - 1
     elif direction.lower() == "east":
         player_position[1] = player_position[1] + 1
-    display_valid_directions(grid, player_position)
     return True
 
 def display_valid_directions(grid, player_position): # Made my own function to check where the player can go for my convenience
@@ -106,15 +103,14 @@ def main():
     grid = load_map(MAP_FILE) # Loads the map
     starting_position = find_start(grid)
     look_around(grid, starting_position)
-    display_valid_directions(grid, starting_position)
     while True:
+        display_valid_directions(grid, starting_position)
         user_command = get_command()
         direction = user_command 
         if user_command.lower() == "escape":
             exit()
         elif user_command.lower() == "show map":
             display_map(grid, starting_position)
-            display_valid_directions(grid, starting_position)
             continue
         get_grid_size(grid)
         direction = direction.split(" ")[1]
