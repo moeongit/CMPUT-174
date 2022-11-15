@@ -13,18 +13,18 @@ def find_start(grid: list[list[str]]) -> list[int, int]:
     starting_index = []
     for i in range(len(grid)):
         for j in range(len(grid[0])):
-            if grid[i][j] == starting_letter:
+            if grid[i][j] == starting_letter: # Append to the list starting_index 
                 starting_index.append(i)
                 starting_index.append(j)
-                break
-    return starting_index
+                break # Breaks the loop
+    return starting_index # Gives us the starting position
 
 def get_command() -> str:
     while True:
         user_input = input("> ")
-        if user_input.lower() == "escape":
+        if user_input.lower() == "escape": # If the user types escape, the function will exit
             exit()
-        print("I do not understand.")
+        print("I do not understand.") # Else, it will print "I do not understand."
 
 def main():
     grid = load_map('cave_map.txt')

@@ -15,29 +15,30 @@ def find_start(grid: list[list[str]]) -> list[int, int]:
     starting_index = []
     for i in range(len(grid)):
         for j in range(len(grid[0])):
-            if grid[i][j] == starting_letter:
+            if grid[i][j] == starting_letter: # Append to the list starting_index 
                 starting_index.append(i)
                 starting_index.append(j)
-                break
-    return starting_index
+                break # Breaks the loop
+    return starting_index # Gives us the starting position
 
 def get_command() -> str:
     while True:
         user_input = input("> ")
-        if user_input.lower() in ["go north", "go south", "go east", "go west", "show map", "escape"]:
-            return user_input
-        print("I do not understand.")
+        if user_input.lower() == "escape": # If the user types escape, the function will exit
+            exit()
+        print("I do not understand.") # Else, it will print "I do not understand."
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
-    new_grid = copy.deepcopy(grid)
-    row = player_position[0]
+    user_input = input("> ")
+    new_grid = copy.deepcopy(grid) # Makes a copy of the grid
+    row = player_position[0] # Rows is the 0 index, cols is the 1st index
     col = player_position[1]
     new_grid[row][col] = "@"
-    for i in new_grid:
-        for j in i:
-            print(j, end = "")
-        print()
-
+    if user_input.lower() == "show map": # If the user tyes "show map", the following will occur
+        for i in new_grid:
+            for j in i:
+                print(j, end = "")
+            print()
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
     Returns the size of the grid.
@@ -51,41 +52,41 @@ def is_inside_grid(grid: list[list[str]], position: list[int, int]) -> bool:
     Checks if a given position is valid (inside the grid).
     """
     grid_rows, grid_cols = get_grid_size(grid)
-    if (position[0] >= grid_rows) or (position[1] >= grid_cols):
+    if (position[0] >= grid_rows) or (position[1] >= grid_cols): # If statement checks, returns False
         return False
-    elif (position[0] < 0) or (position[1] < 0):
+    elif (position[0] < 0) or (position[1] < 0): # If statement checks, returns False
         return False
-    else:
-        return True
+    else: # Else it returns True
+        return True 
 
 def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     """
     Returns the allowed directions.
     """
-    allowed_objects = ('S', 'F', '*')
+    allowed_objects = ('S', 'F', '*') # Allowed characters
     row = player_position[0]
     col = player_position[1]
-    directions = []
+    directions = [] # Made a list to append to
     if is_inside_grid(grid, [row - 1, col]) and grid[row - 1][col] in allowed_objects:
-        directions.append('north')
+        directions.append('north') # This is the math for "North"
     if is_inside_grid(grid, [row + 1, col]) and grid[row + 1][col] in allowed_objects:
-        directions.append('south')
+        directions.append('south') # This is the math for "South"
     if is_inside_grid(grid, [row, col + 1]) and grid[row][col + 1] in allowed_objects:
-        directions.append('east')
+        directions.append('east') # This is the math for "East"
     if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
-        directions.append('west')
-
+        directions.append('west') # This is the math for "West"
+    joined_directions = ", ".join(directions) # Made a variable for a join function
+    print(f"You can go {joined_directions}.") # Joins all the directions together and prints where the user can go
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
-
     valid_directions = look_around(grid, player_position)
     row = player_position[0]
     col = player_position[1]
-    if not direction in valid_directions:
+    if not direction in valid_directions: # If there is no direction in valid direcctions, it will print the following
         print("There is no way there.")
         return False
-    if direction.lower() == "north":
+    if direction.lower() == "north": # Math for the direcctions
         player_position[0] = player_position[0] - 1 
     elif direction.lower() == "south":
         player_position[0] = player_position[0] + 1 
@@ -96,13 +97,13 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
     display_valid_directions(grid, player_position)
     return True
 
-def display_valid_directions(grid, player_position):
+def display_valid_directions(grid, player_position): # Made my own function to check where the player can go for my convenience
     directions = look_around(grid, player_position)
     joined_directions = ", ".join(directions)
     print(f"You can go {joined_directions}")
 
 def main():
-    grid = load_map(MAP_FILE)
+    grid = load_map(MAP_FILE) # Loads the map
     starting_position = find_start(grid)
     look_around(grid, starting_position)
     display_valid_directions(grid, starting_position)
