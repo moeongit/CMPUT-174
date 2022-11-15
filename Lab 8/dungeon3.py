@@ -26,7 +26,6 @@ def get_command() -> str:
             return user_input
         print("I do not understand.")
 
-
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
     new_grid = copy.deepcopy(grid)
     row = player_position[0]
@@ -106,6 +105,7 @@ def main():
             exit()
         elif user_command.lower() == "show map":
             display_map(grid, starting_position)
+            move(direction, starting_position, grid)
             continue
         get_grid_size(grid)
         direction = user_command
