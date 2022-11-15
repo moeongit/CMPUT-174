@@ -3,29 +3,40 @@ import copy
 MAP_FILE = 'cave_map.txt'
 
 def load_map(map_file: str) -> list[list[str]]:
-    """
-    Loads a map from a file as a grid (list of lists)
-    """
-    # Implemented in version 1
+    grid = []
+    with open(map_file, 'r') as file: 
+        for line in file:
+            convert = list(line.strip()) # Converts to a list and strips the "\n"
+            grid.append(convert) # Appends the lists to the list grid
+    return grid
 
 def find_start(grid: list[list[str]]) -> list[int, int]:
-    """
-    Finds the starting position of the player on the map.
-    """
-    # Implemented in version 1
+    starting_letter = "S"
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == starting_letter:
+                starting_index = [i, j]
+                break
+    return starting_index
 
 def get_command() -> str:
-    """
-    Gets a command from the user.
-    """
-    # Implemented in version 1
+    while True:
+        user_input = input("> ")
+        if user_input.lower() == "escape":
+            exit()
+        print("I do not understand.")
 
 def display_map(grid: list[list[str]], player_position: list[int, int]) -> None:
-    """
-    Displays the map.
-    """
-    # TODO: implement this function
-
+    user_input = input("> ")
+    new_grid = copy.deepcopy(grid)
+    row = player_position[0]
+    col = player_position[1]
+    new_grid[row][col] = "@"
+    if user_input.lower() == "show map":
+        for i in new_grid:
+            for j in i:
+                print(j, end = "")
+            print()
 def get_grid_size(grid: list[list[str]]) -> list[int, int]:
     """
     Returns the size of the grid.
@@ -67,10 +78,11 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     return directions
 
 def main():
-    """
-    Main entry point for the game.
-    """
-    # TODO: update the main() function
-
+    grid = load_map(MAP_FILE)
+    starting_position = find_start(grid)
+    look_around(grid, starting_position)
+    display_map(grid, starting_position)
+    get_grid_size(grid)
+    
 if __name__ == '__main__':
     main()
