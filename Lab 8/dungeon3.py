@@ -72,8 +72,8 @@ def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
         directions.append('east')
     if is_inside_grid(grid, [row, col - 1]) and grid[row][col - 1] in allowed_objects:
         directions.append('west')
-    joined_directions = ", ".join(directions)
-    print(f"You can go {joined_directions}")
+    # joined_directions = ", ".join(directions)
+    # print(f"You can go {joined_directions}")
     return directions
 
 def move(direction: str, player_position: list[int, int], grid: list[list[str]]) -> bool:
@@ -83,7 +83,7 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
     row = player_position[0]
     col = player_position[1]
     if not direction in valid_directions:
-        print("Invalid Move.")
+        print("There is no way there.")
         return False
     if direction.lower() == "north":
         player_position[0] = player_position[0] - 1 
@@ -93,23 +93,31 @@ def move(direction: str, player_position: list[int, int], grid: list[list[str]])
         player_position[1] = player_position[1] - 1
     elif direction.lower() == "east":
         player_position[1] = player_position[1] + 1
-    return True
+    display_valid_directions(grid, player_position)
+    return True, row, col
+
+def display_valid_directions(grid, player_position):
+    directions = look_around(grid, player_position)
+    joined_directions = ", ".join(directions)
+    print(f"You can go {joined_directions}")
+
 
 def main():
     grid = load_map(MAP_FILE)
     starting_position = find_start(grid)
     look_around(grid, starting_position)
+    display_valid_directions(grid, starting_position)
     while True:
-        user_command = get_command() 
+        user_command = get_command()
+        direction = user_command 
         if user_command.lower() == "escape":
             exit()
         elif user_command.lower() == "show map":
             display_map(grid, starting_position)
-            move(direction, starting_position, grid)
+            display_valid_directions(grid, starting_position)
             continue
         get_grid_size(grid)
-        direction = user_command
         move(direction, starting_position, grid)
-
+        
 if __name__ == '__main__':
     main()
