@@ -68,7 +68,6 @@ def is_inside_grid(grid: list[list[str]], position: list[int, int]) -> bool:
     else: # Else it returns True
         return True 
 
-
 def look_around(grid: list[list[str]], player_position: list[int, int]) -> list:
     """
     Returns the allowed directions.
