@@ -1,6 +1,13 @@
 import requests, pprint
 
 
+def get_currency_name(code):
+    url = 'https://api.exchangerate.host/symbols'
+    response = requests.get(url)
+    data = response.json()
+    return data["symbols"][code]["description"]
+
+
 def main():
     url = 'https://api.exchangerate.host/latest'
 
@@ -19,7 +26,8 @@ def main():
     # pprint.pprint(rates)
     print(f"{amount} CAD is equal to: ")
     for code, amount in rates.items(): # Important - do .items() 
-        print(f"{amount} {code}")
+        name = get_currency_name(code)
+        print(f"{round(amount, 2)} {name}")
 
 
 
