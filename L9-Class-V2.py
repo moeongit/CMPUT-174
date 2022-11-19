@@ -10,7 +10,6 @@ def get_currency_name(code):
 
 def main():
     url = 'https://api.exchangerate.host/latest'
-
     cur_from = "CAD"
     cur_to = []
     amount = float(input("Enter amount in Canadian Dollars: "))
