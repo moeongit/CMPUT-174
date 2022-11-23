@@ -1,3 +1,7 @@
+# This program takes a user input which is the name of a show and returns a maximum of 10 shows which contain the users input
+# It then asks the user to select a show and then gives him the seasons of that show, as well as the premiere date and ending of each season with the number of episodes
+# It then asks the user to input a season, and gives the user the episode name of of each episode, along with the rating
+
 import requests
 
 def get_shows(query: str) -> list[dict]:
@@ -5,19 +9,19 @@ def get_shows(query: str) -> list[dict]:
     Search for TV shows using the TV Maze API.
     If the show is not found, return None
     """
-    new_url = "https://api.tvmaze.com/search/shows/"
-    query = {"q":query}
-    response = requests.get(new_url, query)
+    new_url = "https://api.tvmaze.com/search/shows/" # Function that just gets the shows from this api
+    query = {"q":query} 
+    response = requests.get(new_url, query) 
     results = response.json()
-    if query not in results:
+    if query not in results: 
         return results
     return None
 
 def format_show_name(show: dict) -> str:
     """
     Format the show name.
-    """
-    show_premiered = '?'
+    """ 
+    show_premiered = '?' # Using keys from the parameter and checks if theyre not None, if they arent it does whatever is under the if statement
     if show['premiered'] is not None:
         show_premiered = show['premiered'][:4]
     show_ended = '?'
@@ -28,15 +32,15 @@ def format_show_name(show: dict) -> str:
         show_genres = ', '.join(show['genres'])
     for i in range(len(show_genres)):
         show_genres = show_genres.lower()
-    return f"{show['name']} ({show_premiered} - {show_ended}, {show_genres})"
+    return f"{show['name']} ({show_premiered} - {show_ended}, {show_genres})" # Returns the show name, the date it premiered - the date it ended, and the genres
 
 def get_seasons(show_id: int) -> list[dict]:
     """
     Get the seasons for a given show_id
     """
-    new_url = f"https://api.tvmaze.com/shows/{show_id}/seasons"
+    new_url = f"https://api.tvmaze.com/shows/{show_id}/seasons" # Url that contains the show ID
     response = requests.get(new_url)
-    if response.status_code == 200:
+    if response.status_code == 200: 
         return response.json()
 
 def format_season_name(season: dict) -> str:
@@ -71,8 +75,6 @@ def get_episodes_of_season(season_id: int) -> list[dict]:
     response = requests.get(new_url)
     if response.status_code == 200:
         return response.json()
-
-    # TODO: Implement the function
 
 def format_episode_name(episode: dict) -> str:
     """
