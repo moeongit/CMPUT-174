@@ -47,7 +47,7 @@ def format_season_name(season: dict) -> str:
     """
     Format the season name
     """
-    if season['number'] is not None:
+    if season['number'] is not None: # Multiple if statements, if not none and then took the keys from the json
         season_number = season['number']
     else:
         season_number = "?"
@@ -64,14 +64,14 @@ def format_season_name(season: dict) -> str:
     else:
         episodes_number = "?"
 
-    return f"Season {season_number} ({season_premiere_year} - {end_year}), {episodes_number} episodes"
+    return f"Season {season_number} ({season_premiere_year} - {end_year}), {episodes_number} episodes" # Return statement 
 
 def get_episodes_of_season(season_id: int) -> list[dict]:
     """
     Get the episodes of a given season of a show
     season_id is the id (not the number!) of the season
     """
-    new_url = f"https://api.tvmaze.com/seasons/{season_id}/episodes"
+    new_url = f"https://api.tvmaze.com/seasons/{season_id}/episodes" # URL that contains the season ID
     response = requests.get(new_url)
     if response.status_code == 200:
         return response.json()
@@ -81,7 +81,7 @@ def format_episode_name(episode: dict) -> str:
     Format the episode name
     """
     if episode['name'] is not None:
-        episode_name = episode['name']
+        episode_name = episode['name'] # Multiple if statements to format the episode name using the parameter 'episode' and the keys from the json
     else:
         episode_name = '?'
     if episode['season'] is not None:
@@ -96,7 +96,7 @@ def format_episode_name(episode: dict) -> str:
         episode_rating = episode['rating'].get("average")
     else:
         episode_rating = '?'
-    return f"S{episode_season_number}E{episode_number} {episode_name} (rating: {episode_rating})"
+    return f"S{episode_season_number}E{episode_number} {episode_name} (rating: {episode_rating})" # Return statement
 
 def main():
     query = input("Search for a show: ")
@@ -109,8 +109,8 @@ def main():
         print("Here are the results:")
         for result in results:
             show = result["show"]
-            print(f"{n}. {format_show_name(show)}")
-            n += 1 
+            print(f"{n}. {format_show_name(show)}") # N stands for number
+            n += 1 # Counter adds 1 each time so it goes from 1 - number
         select = int(input("Select a show: "))
         print(f"Seasons of {results[select - 1]['show']['name']}:")
         selected_show = results[select - 1]["show"]
