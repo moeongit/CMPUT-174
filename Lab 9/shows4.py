@@ -70,7 +70,6 @@ def get_episodes_of_season(season_id: int) -> list[dict]:
     new_url = f"https://api.tvmaze.com/seasons/{season_id}/episodes"
     response = requests.get(new_url)
     if response.status_code == 200:
-        print(response.json)
         return response.json()
 
     # TODO: Implement the function
@@ -79,7 +78,23 @@ def format_episode_name(episode: dict) -> str:
     """
     Format the episode name
     """
-    # TODO: Implement the function
+    if episode['name'] is not None:
+        episode_name = episode['name']
+    else:
+        episode_name = '?'
+    if episode['season'] is not None:
+        episode_season_number = episode['season']
+    else:
+        episode_season_number = '?'
+    if episode['number'] is not None:
+        episode_number = episode['number']
+    else:
+        episode_number = '?'
+    if episode['rating'] is not None:
+        episode_rating = episode['rating'].get("average")
+    else:
+        episode_rating = '?'
+    return f"S{episode_season_number}E{episode_number} {episode_name} (rating: {episode_rating})"
 
 def main():
     query = input("Search for a show: ")
@@ -95,21 +110,28 @@ def main():
             print(f"{n}. {format_show_name(show)}")
             n += 1 
         select = int(input("Select a show: "))
-        print(f"Seasons of {query}:")
+        print(f"Seasons of {results[select - 1]['show']['name']}:")
         selected_show = results[select - 1]["show"]
         show_id = selected_show["id"]
         seasons = get_seasons(show_id)
+        season_id = selected_show["id"]
+        episodes = get_episodes_of_season(season_id)
         counter = 1
+        counter_episodes = 1
         
         if len(seasons) == 0:
             print("no seasons found")
         else:
             for season in seasons:
-                results = format_season_name(season)
-                print(f"{counter}. {results}")
+                results_season = format_season_name(season)
+                print(f"{counter}. {results_season}")
                 counter += 1
             select_episode = int(input("Select a season: "))
-                  
+            print(f"Episodes of {results[select - 1]['show']['name']} S{select_episode}:")
+            for episode in episodes:
+                episode_results = format_episode_name(episode)
+                print(f"{counter_episodes}. {episode_results}")
+                counter_episodes += 1
 
 if __name__ == '__main__':
     main()
