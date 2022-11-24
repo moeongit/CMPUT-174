@@ -52,11 +52,11 @@ def format_season_name(season: dict) -> str:
     else:
         season_number = "?"
     if season['premiereDate'] is not None:
-        season_premiere_year = season['premiereDate'].split("-")[0]
+        season_premiere_year = season['premiereDate'].split("-")[0] # Gets the year only
     else:
         season_premiere_year = "?"
     if season['endDate'] is not None:
-        end_year = season['endDate'].split("-")[0]
+        end_year = season['endDate'].split("-")[0] # Gets the year only
     else:
         end_year = "?"
     if season['episodeOrder'] is not None:
@@ -117,7 +117,7 @@ def main():
         show_id = selected_show["id"]
         seasons = get_seasons(show_id)
         season_id = selected_show["id"]
-        episodes = get_episodes_of_season(season_id)
+        episodes = get_episodes_of_season(season_id) # Called this function
         counter = 1
         counter_episodes = 1
         
@@ -125,12 +125,12 @@ def main():
             print("no seasons found")
         else:
             for season in seasons:
-                results_season = format_season_name(season)
+                results_season = format_season_name(season) # Called the function
                 print(f"{counter}. {results_season}")
                 counter += 1
             select_episode = int(input("Select a season: "))
             print(f"Episodes of {results[select - 1]['show']['name']} S{select_episode}:")
-            for episode in episodes:
+            for episode in episodes: # Needed for loops to itereate through the numbers
                 episode_results = format_episode_name(episode)
                 print(f"{counter_episodes}. {episode_results}")
                 counter_episodes += 1
