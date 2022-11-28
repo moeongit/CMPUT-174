@@ -44,6 +44,5 @@ def main():
     """
     pokemon1 = Pokemon("Pikachu", 55, 40, 35, 35)
     pokemon2 = Pokemon("Bulbasaur", 49, 49, 45, 45)
-    
-
+    print(f"Welcome, {pokemon1} and {pokemon2}!")
 main()
