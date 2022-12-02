@@ -1,5 +1,7 @@
 import random
 
+# This program introduces classes and gives us the health, name, and other stats of 2 pokemons from a list of 802.
+
 class Pokemon:
     def __init__ (self, name, attack, defense, max_health, current_health):
         self.name = name
